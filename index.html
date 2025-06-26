@@ -13,32 +13,54 @@
 
 <body :class="dark ? 'bg-gray-950 text-white' : 'bg-white text-gray-800'" class="font-sans transition duration-300">
 
-  <!-- Navbar -->
-  <header
-    :class="dark 
-      ? 'bg-gray-900 text-gray-300 border-b border-gray-700'
-      : 'bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-700 text-white shadow-md'"
-    class="py-5 px-6 flex justify-between items-center"
-  >
-    <h1 class="text-2xl font-bold">
-      <span :class="dark ? 'text-indigo-400' : 'text-white'">AppSpectrum</span>
-    </h1>
-    <nav class="space-x-6 text-xl">
-      <a href="#services" :class="dark ? 'text-gray-300 hover:text-indigo-400' : 'text-white hover:text-indigo-100'">Services</a>
-      <a href="#tech" :class="dark ? 'text-gray-300 hover:text-indigo-400' : 'text-white hover:text-indigo-100'">Tech</a>
-      <a href="#contact" :class="dark ? 'text-gray-300 hover:text-indigo-400' : 'text-white hover:text-indigo-100'">Contact</a>
-    </nav>
-    <button
-      @click="dark = !dark"
-      :class="dark 
-        ? 'text-white' 
-        : 'text-white'"
-      class="text-xl p-2 rounded-full transition"
-      :aria-label="dark ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
-    >
+<!-- Navbar -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Working Nav</title>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="antialiased font-sans">
+
+<header x-data="{ open: false }"
+  :class="dark 
+    ? 'bg-gray-900 text-gray-300 border-b border-gray-700'
+    : 'bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-700 text-white shadow-md'"
+  class="relative py-5 px-6 flex justify-between items-center"
+>
+  <h1 class="text-2xl font-bold">
+    <span :class="dark ? 'text-indigo-400' : 'text-white'">AppSpectrum</span>
+  </h1>
+
+  <!-- Hamburger -->
+  <button @click="open = !open" class="sm:hidden text-white text-3xl" aria-label="Toggle menu">
+    <i :class="open ? 'fas fa-times' : 'fas fa-bars'"></i>
+  </button>
+
+  <!-- Desktop Nav -->
+  <nav class="hidden sm:flex space-x-6 text-xl items-center">
+    <a href="#services">Services</a>
+    <a href="#tech">Tech</a>
+    <a href="#contact">Contact</a>
+    <button @click="dark = !dark" class="text-xl p-2">
       <i :class="dark ? 'fas fa-sun' : 'fas fa-moon'"></i>
     </button>
-  </header>
+  </nav>
+
+  <!-- Mobile Dropdown -->
+  <nav x-show="open" x-transition x-cloak class="absolute top-full left-0 w-full bg-inherit flex flex-col space-y-4 mt-4 text-xl text-center px-6 sm:hidden z-50">
+    <a href="#services">Services</a>
+    <a href="#tech">Tech</a>
+    <a href="#contact">Contact</a>
+    <button @click="dark = !dark" class="text-xl p-2">
+      <i :class="dark ? 'fas fa-sun' : 'fas fa-moon'"></i>
+    </button>
+  </nav>
+</header>
 
 <section
   :class="dark ? 'bg-gray-950' : ''"
